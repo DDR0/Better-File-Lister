@@ -1,0 +1,20 @@
+body {
+	margin: 50px;
+}
+
+#status::before {
+	content: '‍Status:';
+	padding-right: 1ch;
+}
+
+iframe {
+	display:block;
+	resize: both;
+}
+
+button {
+	margin-right: 1ch;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
