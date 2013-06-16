@@ -1,4 +1,4 @@
-Interactive File Lister is a web app that lets the user browse part of the server file system. It is a little faster than the standard one-HTML-page-per-folder app that Nginx or Apache ship with, and it caches results so the second view of a directory is instantaneous. IFL also lets the user preview files inline, without leaving the app.
+Interactive File Lister is a web app that lets the user browse part of the server file system. It is a little faster than the standard one-HTML-page-per-folder app that Nginx or Apache ship with, and it caches results so the second view of a directory is instantaneous. IFL also lets the user preview files inline, without leaving the app. An example screenshot is located at https://raw.github.com/DDR0/Better-File-Lister/master/screenshot.jpeg.
 
 Instructions, linux, server-side:
 First, install Nginx and Node.js. (I have v1.4.1 and v0.6.19, respectively.)
