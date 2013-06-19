@@ -60,31 +60,36 @@ app.listen(port);
 
 io.sockets.on('connection', function (socket) {
 	socket.on('request file', function (path) {		
-		var layer = getLayer(path);
-		var obj = {}; //To return.
-		
-		c.log('   req   - ', {
-			type: 'file request:', 
-			path: layer.url,
-			time: Math.round(new Date().getTime()/1000),
-		})
-		
-		if(layer.type === 'folder') {
-			obj = {
-				name: layer.name,
-				url: layer.url,
-				type: layer.type,
-				contents: layer,
+		try {
+			var layer = getLayer(path);
+			var obj = {}; //To return.
+			
+			c.log('request:', {
+				type: 'file request:', 
+				path: layer.url,
+				time: Math.round(new Date().getTime()/1000),
+			})
+			
+			if(layer.type === 'folder') {
+				obj = {
+					name: layer.name,
+					url: layer.url,
+					type: layer.type,
+					contents: layer,
+				}
+			} else {
+				obj = layer;
 			}
-		} else {
-			obj = layer;
+			obj.path = path;
+			
+			//setTimeout(function() { //For testing! It is, indeed, much worse with two seconds of lag.
+			//	socket.emit('file data', obj);
+			//}, 2000);
+			socket.emit('file data', obj);
+		} catch (e) {
+			c.log('Caught exception. Path, error:', path, e);
+			socket.emit('error', typeof e);
 		}
-		obj.path = path;
-		
-		//setTimeout(function() { //For testing! It is, indeed, much worse with two seconds of lag.
-		//	socket.emit('file data', obj);
-		//}, 2000);
-		socket.emit('file data', obj);
 	});
 });
 
